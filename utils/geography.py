@@ -2,6 +2,17 @@ import math
 import numpy as np
 
 def lon_lat_to_distance(lat1, lon1, lat2, lon2):
+    """This function is for transform latitude and longitude pairs into distance
+
+    Args:
+        lat1 (float): latitude of the first point
+        lon1 (float): longitude of the first point
+        lat2 (float): latitude of the second point
+        lon2 (float): longitude of the second point
+
+    Returns:
+        float: approximate distance between two points
+    """
     
     Earth_Radius = 6378.137 # approximate radius of earth in km
     
@@ -20,6 +31,16 @@ def lon_lat_to_distance(lat1, lon1, lat2, lon2):
     return distance
 
 def cal_edges(lat_range, lon_range, grid_dist):
+    """A helper function to calculate the edges, for later plotting heatmap
+
+    Args:
+        lat_range (tuple): latitude range
+        lon_range (tuple): longtitude range
+        grid_dist (int): desired length of each block (in meters)
+
+    Returns:
+        two list: lists of chunks (approximated), one list for each latitude and longitude
+    """
     lat_dist = lon_lat_to_distance(lat_range[0], lon_range[0], lat_range[1], lon_range[0])
     lon_dist = lon_lat_to_distance(lat_range[0], lon_range[0], lat_range[0], lon_range[1])
     num_edges_lat = math.ceil(lat_dist * 1e3 / grid_dist)
